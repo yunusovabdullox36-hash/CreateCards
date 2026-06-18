@@ -57,6 +57,6 @@ const CardSchema = new mongoose.Schema({
     photoUrl: String,
   },
 
-}, { timestamps: true });
+}, { timestamps: true, id: false });
 
 module.exports = mongoose.model('Card', CardSchema);
