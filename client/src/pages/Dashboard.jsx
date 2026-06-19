@@ -19,7 +19,9 @@ export default function Dashboard() {
     }
   }
 
-  useEffect(() => { fetchCards() }, [])
+  useEffect(() => {
+    Promise.resolve().then(() => fetchCards())
+  }, [])
 
   const handleDelete = async (id) => {
     if (!confirm('Cardni o\'chirishni xohlaysizmi?')) return

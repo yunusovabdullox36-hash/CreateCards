@@ -1,7 +1,6 @@
-import { createContext, useContext, useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { authAPI } from '../api/axios'
-
-const AuthContext = createContext(null)
+import { AuthContext } from './auth'
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null)
@@ -9,14 +8,16 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     const token = localStorage.getItem('token')
-    if (token) {
+    Promise.resolve().then(() => {
+      if (!token) {
+        setLoading(false)
+        return
+      }
       authAPI.getMe()
         .then((res) => setUser(res.data.user))
         .catch(() => localStorage.removeItem('token'))
         .finally(() => setLoading(false))
-    } else {
-      setLoading(false)
-    }
+    })
   }, [])
 
   const login = async (email, password) => {
@@ -44,5 +45,3 @@ export function AuthProvider({ children }) {
     </AuthContext.Provider>
   )
 }
-
-export const useAuth = () => useContext(AuthContext)

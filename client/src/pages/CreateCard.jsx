@@ -61,14 +61,14 @@ export default function CreateCard() {
         return (
           <>
             <input placeholder="Name" value={data.name || ''} onChange={(e) => handleChange('name', e.target.value)} required />
-            <input type="number" placeholder="HP" value={data.hp || ''} onChange={(e) => handleChange('hp', +e.target.value)} />
+            <input type="number" placeholder="HP" value={data.hp || ''} onChange={(e) => handleChange('hp', e.target.value === '' ? '' : +e.target.value)} />
             <select value={data.element || 'Electric'} onChange={(e) => handleChange('element', e.target.value)}>
               {['Electric', 'Fire', 'Water', 'Grass', 'Psychic', 'Fighting', 'Dark', 'Dragon', 'Normal'].map((el) => (
                 <option key={el}>{el}</option>
               ))}
             </select>
             <input placeholder="Attack Name" value={data.attack || ''} onChange={(e) => handleChange('attack', e.target.value)} />
-            <input type="number" placeholder="Attack Damage" value={data.attackDamage || ''} onChange={(e) => handleChange('attackDamage', +e.target.value)} />
+            <input type="number" placeholder="Attack Damage" value={data.attackDamage || ''} onChange={(e) => handleChange('attackDamage', e.target.value === '' ? '' : +e.target.value)} />
             <select value={data.rarity || 'Common'} onChange={(e) => handleChange('rarity', e.target.value)}>
               {['Common', 'Rare', 'Legendary'].map((r) => (<option key={r}>{r}</option>))}
             </select>
