@@ -7,18 +7,16 @@ connectDB();
 
 const app = express();
 
+const allowedOrigins = [
+  'http://localhost:5173',
+  ...(process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',').map(s => s.trim()) : []),
+]
+
 app.use((req, res, next) => {
   const origin = req.headers.origin;
-  const allowed = [
-    'http://localhost:5173',
-    'http://localhost:3000',
-    process.env.CORS_ORIGIN,
-  ].filter(Boolean);
 
-  if (origin && allowed.includes(origin)) {
+  if (origin && allowedOrigins.includes(origin)) {
     res.setHeader('Access-Control-Allow-Origin', origin);
-  } else if (!origin) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
   }
 
   res.setHeader('Access-Control-Allow-Credentials', 'true');
