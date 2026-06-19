@@ -9,6 +9,8 @@ const app = express();
 
 const allowedOrigins = [
   'http://localhost:5173',
+  'http://localhost:3000',
+  'https://createyourcards-client.onrender.com',
   ...(process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',').map(s => s.trim()) : []),
 ]
 
@@ -16,6 +18,8 @@ app.use((req, res, next) => {
   const origin = req.headers.origin;
 
   if (origin && allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  } else if (origin && origin.endsWith('.onrender.com')) {
     res.setHeader('Access-Control-Allow-Origin', origin);
   }
 
