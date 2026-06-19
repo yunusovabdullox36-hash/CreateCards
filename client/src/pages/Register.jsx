@@ -25,17 +25,17 @@ export default function Register() {
         <h2>Ro'yxatdan o'tish</h2>
         {error && <div className="auth-error">{error}</div>}
         <input
-          type="text" placeholder="Ismingiz" required
+          type="text" placeholder="Ismingiz" required autoComplete="name"
           value={form.name}
           onChange={(e) => setForm({ ...form, name: e.target.value })}
         />
         <input
-          type="email" placeholder="Email" required
+          type="email" placeholder="Email" required autoComplete="email"
           value={form.email}
           onChange={(e) => setForm({ ...form, email: e.target.value })}
         />
         <input
-          type="password" placeholder="Parol (min 6)" required minLength={6}
+          type="password" placeholder="Parol (min 6)" required minLength={6} autoComplete="new-password"
           value={form.password}
           onChange={(e) => setForm({ ...form, password: e.target.value })}
         />

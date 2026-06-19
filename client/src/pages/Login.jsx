@@ -25,12 +25,12 @@ export default function Login() {
         <h2>Kirish</h2>
         {error && <div className="auth-error">{error}</div>}
         <input
-          type="email" placeholder="Email" required
+          type="email" placeholder="Email" required autoComplete="email"
           value={form.email}
           onChange={(e) => setForm({ ...form, email: e.target.value })}
         />
         <input
-          type="password" placeholder="Parol" required
+          type="password" placeholder="Parol" required autoComplete="current-password"
           value={form.password}
           onChange={(e) => setForm({ ...form, password: e.target.value })}
         />
