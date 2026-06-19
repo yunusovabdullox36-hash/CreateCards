@@ -1,0 +1,684 @@
+:root {
+  --bg: #0f0f1a;
+  --surface: #1a1a2e;
+  --surface2: #16213e;
+  --text: #e0e0e0;
+  --text-secondary: #a0a0b0;
+  --accent: #e94560;
+  --accent-hover: #d63851;
+  --border: #2a2a4a;
+  --radius: 12px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* ─── Navbar ───────────────────── */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.navbar-brand {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.navbar-links a {
+  color: var(--text);
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.2s;
+}
+
+.navbar-links a:hover { color: var(--accent); }
+
+.navbar-user {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.navbar-logout {
+  background: none;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: 0.2s;
+}
+
+.navbar-logout:hover {
+  background: var(--accent);
+  color: white;
+}
+
+/* ─── Auth Pages ──────────────── */
+.auth-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+}
+
+.auth-form {
+  background: var(--surface);
+  padding: 40px;
+  border-radius: var(--radius);
+  width: 100%;
+  max-width: 420px;
+  border: 1px solid var(--border);
+}
+
+.auth-form h2 {
+  text-align: center;
+  margin-bottom: 24px;
+  font-size: 1.5rem;
+}
+
+.auth-form input,
+.auth-form select,
+.auth-form textarea {
+  width: 100%;
+  padding: 12px 16px;
+  margin-bottom: 12px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.auth-form input:focus,
+.auth-form select:focus,
+.auth-form textarea:focus {
+  border-color: var(--accent);
+}
+
+.auth-form textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.auth-btn, .create-btn {
+  width: 100%;
+  padding: 12px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.auth-btn:hover, .create-btn:hover {
+  background: var(--accent-hover);
+}
+
+.auth-error {
+  background: rgba(233, 69, 96, 0.15);
+  color: var(--accent);
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.auth-link {
+  text-align: center;
+  margin-top: 16px;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.auth-link a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+/* ─── Dashboard ───────────────── */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.dashboard-header h2 {
+  font-size: 1.5rem;
+}
+
+.create-btn {
+  width: auto;
+  padding: 10px 20px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-secondary);
+}
+
+.empty-state p {
+  margin-bottom: 16px;
+  font-size: 1.1rem;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.loading {
+  text-align: center;
+  padding: 60px;
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}
+
+/* ─── Card Wrapper ────────────── */
+.card-wrapper {
+  position: relative;
+  background: var(--surface);
+  border: 2px solid;
+  border-radius: var(--radius);
+  padding: 16px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card-wrapper:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+
+.card-type-badge {
+  position: absolute;
+  top: -10px;
+  right: 12px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.card-date {
+  margin-top: 12px;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  text-align: right;
+}
+
+.card-delete-btn {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  background: rgba(233, 69, 96, 0.2);
+  border: none;
+  border-radius: 6px;
+  padding: 4px 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.card-wrapper:hover .card-delete-btn {
+  opacity: 1;
+}
+
+/* ─── Pokemon Card ────────────── */
+.pokemon-card {
+  --element-color: #ffcc00;
+  background: linear-gradient(135deg, #1a1a2e, #2a1a1a);
+  border-radius: var(--radius);
+  padding: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.pokemon-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: var(--element-color);
+  color: #000;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.pokemon-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.pokemon-name {
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-shadow: 0 0 10px var(--element-color);
+}
+
+.pokemon-hp {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.pokemon-image {
+  display: flex;
+  justify-content: center;
+  margin: 12px 0;
+}
+
+.pokemon-image img {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+}
+
+.pokemon-placeholder {
+  width: 120px;
+  height: 120px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pokemon-emoji {
+  font-size: 3rem;
+}
+
+.pokemon-info {
+  text-align: center;
+  margin: 8px 0;
+}
+
+.pokemon-element {
+  padding: 4px 16px;
+  border-radius: 12px;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.pokemon-attack {
+  display: flex;
+  justify-content: space-between;
+  background: rgba(255,255,255,0.05);
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin: 8px 0;
+}
+
+.attack-name {
+  font-weight: 600;
+}
+
+.attack-damage {
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.pokemon-desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-top: 8px;
+  font-style: italic;
+}
+
+/* ─── Credit Card ─────────────── */
+.credit-card {
+  border-radius: var(--radius);
+  padding: 24px;
+  color: white;
+  min-height: 200px;
+  position: relative;
+  overflow: hidden;
+}
+
+.credit-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -30%;
+  width: 200px;
+  height: 200px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 50%;
+}
+
+.credit-chip {
+  width: 40px;
+  height: 30px;
+  background: linear-gradient(135deg, #ffd700, #ffaa00);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.chip-inner {
+  width: 20px;
+  height: 14px;
+  border: 2px solid rgba(0,0,0,0.3);
+  border-radius: 2px;
+}
+
+.credit-type {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.credit-number {
+  font-size: 1.3rem;
+  letter-spacing: 3px;
+  font-family: 'Courier New', monospace;
+  margin-bottom: 20px;
+}
+
+.credit-footer {
+  display: flex;
+  gap: 32px;
+}
+
+.credit-label {
+  display: block;
+  font-size: 0.65rem;
+  opacity: 0.7;
+  letter-spacing: 1px;
+  margin-bottom: 2px;
+}
+
+.credit-value {
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+
+.credit-bank {
+  position: absolute;
+  bottom: 16px;
+  right: 24px;
+  font-size: 0.8rem;
+  opacity: 0.6;
+}
+
+/* ─── Business Card ───────────── */
+.business-card {
+  background: var(--surface2);
+  border-radius: var(--radius);
+  padding: 20px;
+  border-top: 4px solid;
+}
+
+.business-header {
+  margin-bottom: 8px;
+}
+
+.business-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.business-position {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.business-company {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  opacity: 0.8;
+}
+
+.business-divider {
+  height: 2px;
+  margin-bottom: 12px;
+  opacity: 0.3;
+}
+
+.business-details {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+/* ─── ID Card ─────────────────── */
+.id-card {
+  background: linear-gradient(135deg, #1a1a2e, #2a2a4a);
+  border-radius: var(--radius);
+  padding: 20px;
+  border: 1px solid var(--border);
+}
+
+.id-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--border);
+}
+
+.id-flag {
+  font-size: 1.5rem;
+}
+
+.id-title {
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  font-weight: 600;
+  opacity: 0.7;
+}
+
+.id-body {
+  display: flex;
+  gap: 16px;
+}
+
+.id-photo {
+  flex-shrink: 0;
+}
+
+.id-photo img {
+  width: 80px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.id-photo-placeholder {
+  width: 80px;
+  height: 100px;
+  background: var(--surface);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+}
+
+.id-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.id-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.id-label {
+  font-size: 0.65rem;
+  letter-spacing: 1px;
+  opacity: 0.6;
+  text-transform: uppercase;
+}
+
+.id-value {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* ─── Create Card Page ────────── */
+.create-card-page {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+}
+
+.create-card-form {
+  background: var(--surface);
+  padding: 32px;
+  border-radius: var(--radius);
+  width: 100%;
+  max-width: 520px;
+  border: 1px solid var(--border);
+}
+
+.create-card-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.type-selector {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.type-btn {
+  padding: 10px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: 0.2s;
+}
+
+.type-btn.active {
+  border-color: var(--accent);
+  background: rgba(233, 69, 96, 0.15);
+  color: var(--accent);
+}
+
+.type-btn:hover {
+  border-color: var(--accent);
+}
+
+.form-fields {
+  margin-bottom: 16px;
+}
+
+/* ─── View Card Page ──────────── */
+.view-card-page {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.view-card-page .card-wrapper {
+  cursor: default;
+}
+
+.view-card-page .card-wrapper:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.back-btn {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 16px;
+  font-size: 0.9rem;
+  transition: 0.2s;
+}
+
+.back-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ─── Responsive ──────────────── */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .navbar-links {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .id-body {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .type-selector {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .auth-form {
+    padding: 24px;
+  }
+}
